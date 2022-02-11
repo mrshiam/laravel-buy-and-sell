@@ -1,12 +1,28 @@
 <x-master-layout>
     <div class="m-4 flex">
         <!-- Left half -->
-        <div class="w-1/2 rounded shadow overflow-hidden">
-            <img class="w-full object-cover h-96" src="{{asset($product->image_url)}}" alt="">
+        <div class="w-1/2 rounded shadow overflow-hidden grid content-center">
+            <img class="w-full h-auto object-cover" src="{{asset($product->image_url)}}" alt="">
         </div>
         <!-- Right half -->
         <div class="w-1/2 rounded bg-white ml-2 p-4 shadow relative">
-            <div class="text-sm font-semibold">{{$product->name}}</div>
+            @if(Auth::id()==$product->user->id)
+                <div class="flex">
+                    <a href="/edit/{{$product->id}}">
+                        <div class="bg-blue-500 rounded-full px-4 py-2 shadow text-xs text-white">Edit</div>
+                    </a>
+                    <form action="/delete/{{$product->id}}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="bg-red-300 ml-1 rounded-full px-4 py-2 shadow text-xs text-white">Delete</button>
+                    </form>
+
+
+
+
+                </div>
+            @endif
+            <div class="text-sm font-semibold">{{$product->title}}</div>
             <div class="text-sm text-gray-500">{{$product->short_desc}}</div>
             <div class="text-xs text-gray-500 mt-2">{{$product->long_desc}}</div>
 

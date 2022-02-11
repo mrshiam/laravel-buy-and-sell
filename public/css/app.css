@@ -720,6 +720,9 @@ select {
 .h-96 {
   height: 24rem;
 }
+.h-auto {
+  height: auto;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -804,6 +807,9 @@ select {
 }
 .flex-col {
   flex-direction: column;
+}
+.content-center {
+  align-content: center;
 }
 .items-center {
   align-items: center;
@@ -919,6 +925,14 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
 .fill-current {
   fill: currentColor;
 }
@@ -970,6 +984,10 @@ select {
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .pt-8 {
   padding-top: 2rem;

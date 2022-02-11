@@ -17,15 +17,19 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [ProductsController::class,'showOwnProducts'])->middleware(['auth','verified'])->name('dashboard');
 
 Route::get('/', [ProductsController::class,'index']);
 
 Route::get('/product/{id}', [ProductsController::class,'show']);
 
 Route::post('/product', [ProductsController::class,'store']);
+
+Route::get('/edit/{id}', [ProductsController::class,'edit'])->middleware(['auth','verify_seller']);
+
+Route::post('/update/{id}', [ProductsController::class,'update'])->middleware(['auth']);
+
+Route::delete('/delete/{id}', [ProductsController::class,'destroy'])->middleware(['auth','verify_seller']);
 
 Route::get('/sell', function () {
     return view('sell');

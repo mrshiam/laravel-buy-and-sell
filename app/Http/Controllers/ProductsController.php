@@ -10,8 +10,15 @@ class ProductsController extends Controller
 {
 
     public function index(){
-        $data['products'] = Product::all();
+        $data['products'] = Product::orderBy('created_at','DESC')->paginate(12);
         return view('products',$data);
+    }
+
+    public function showOwnProducts()
+    {
+        $products = Product::where('user_id',Auth::id())->orderBy('created_at','DESC')->get();
+
+        return view('dashboard')->with('products',$products);
     }
 
     public function show($id){
@@ -50,6 +57,44 @@ class ProductsController extends Controller
 
         $product->save();
 
-        return redirect()->route('/product/'.$product->id);
+        return redirect('/product/'.$product->id);
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        return view('edit_product')->with('product',$product);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title'=> 'required',
+            'desc-full'=> 'required',
+            'desc-sm'=> 'required',
+            'price'=> 'required|numeric',
+        ]);
+
+        $product = Product::find($id);
+        if($request->hasFile('img')){
+            $path = $request->file('img')->store('product_images');
+            $product->image_url = $path;
+        }
+
+        $product->title = $request->input('title');
+        $product->short_desc = $request->input('desc-sm');
+        $product->long_desc = $request->input('desc-full');
+        $product->price = $request->input('price');
+        $product->user_id=Auth::id();
+
+        $product->save();
+        return redirect('/product/'.$product->id);
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('dashboard');
     }
 }
