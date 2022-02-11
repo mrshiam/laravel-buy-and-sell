@@ -2,36 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+
+    public function index(){
+        $data['products'] = Product::all();
+        return view('products',$data);
+    }
+
+    public function show($id){
+        $product = Product::find($id);
+        return view('product')->with('product', $product);
+    }
     public function store(Request $request){
         //validate inputs
         $request->validate([
             'title'=> 'required',
-            'short_desc'=> 'required',
-            'long_desc'=> 'required',
+            'desc-full'=> 'required',
+            'desc-sm'=> 'required',
             'price'=> 'required|numeric',
             'img'=> 'required',
-            'user_id'=> 'required',
         ],[
             'title.required' => 'Please Enter Product Title',
-            'short_desc.required' => 'Please Enter Short Description',
-            'long_desc.required' => 'Please Enter Full Description',
+            'desc-sm.required' => 'Please Enter Short Description',
+            'desc-full.required' => 'Please Enter Full Description',
             'price.required' => 'Please Enter Product Price',
             'price.numeric' => 'Please Enter Numeric Value for price',
             'img.required' => 'Please Upload a Product Image',
-            'user_id.required' => 'Please Enter User ID',
-        ],[
-            'short_desc' => 'Short Description',
-            'long_desc' => 'Long Description',
-            'img' => 'Product Image',
         ]);
 
         //Upload the image
         $path = $request->file('img')->store('product_images');
-        dd($path);
+
         //Insert data into the product table
+        $product = new Product();
+
+        $product->title = $request->input('title');
+        $product->short_desc = $request->input('desc-sm');
+        $product->long_desc = $request->input('desc-full');
+        $product->price = $request->input('price');
+        $product->image_url = $path;
+        $product->user_id=Auth::id();
+
+        $product->save();
+
+        return redirect()->route('/product/'.$product->id);
     }
 }

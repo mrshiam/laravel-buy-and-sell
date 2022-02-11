@@ -14,27 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/products', function () {
-    return view('products');
-});
+Route::get('/', [ProductsController::class,'index']);
 
-Route::get('/product/{id}', function () {
-    return view('product');
-});
+Route::get('/product/{id}', [ProductsController::class,'show']);
 
 Route::post('/product', [ProductsController::class,'store']);
 
 Route::get('/sell', function () {
     return view('sell');
-});
+})->middleware(['auth']);
 
 require __DIR__.'/auth.php';

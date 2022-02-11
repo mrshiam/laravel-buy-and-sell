@@ -1,18 +1,18 @@
 <x-master-layout>
     <div class="grid grid-cols-4 gap-4 p-4">
-        @for($i=0; $i<10; $i++)
-            <a href="product/1">
+        @foreach($products as $product)
+            <a href="product/{{$product->id}}">
                 <div class="bg-white rounded shadow overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+                    <img src="{{$product->image_url}}" alt="" class="h-72 object-cover w-full">
                     <div class="p-4">
-                        <div class="text-sm font-semibold">Headphone</div>
-                        <div class="text-xs text-gray-500">Excellent quality headphone at a low cost</div>
+                        <div class="text-sm font-semibold">{{$product->title}}</div>
+                        <div class="text-xs text-gray-500 h-8">{{$product->short_desc}}</div>
                     </div>
-                    <div class="border-t px-4 py-2 font-bold text-sm">$20</div>
+                    <div class="border-t px-4 py-2 font-bold text-sm">${{$product->price}}</div>
                 </div>
             </a>
 
-        @endfor
+        @endforeach
     </div>
 </x-master-layout>
 
