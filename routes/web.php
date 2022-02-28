@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [ProductsController::class,'showOwnProducts'])->middleware(['auth','verified'])->name('dashboard');
 
-Route::get('/', [ProductsController::class,'index']);
+Route::get('/', [ProductsController::class,'index'])->name('index');
 
 Route::get('/product/{id}', [ProductsController::class,'show']);
 
@@ -35,4 +37,9 @@ Route::get('/sell', function () {
     return view('sell');
 })->middleware(['auth']);
 
+Route::get('add-to-cart/{product_id}', [CartController::class,'addToCart'])->name('add.to.cart');
+Route::get('cart', [CartController::class,'cart'])->name('cart');
+Route::get('cart.item.delete/{product_id}', [CartController::class,'removeItem'])->name('delete.item');
+Route::get('checkout',[CheckoutController::class,'checkout'])->name('checkout');
+Route::post('checkout',[CheckoutController::class,'store'])->name('place.order');
 require __DIR__.'/auth.php';

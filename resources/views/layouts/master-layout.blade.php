@@ -7,10 +7,12 @@
 <!-- Header -->
 <nav>
     <div class="flex justify-between p-6 items-center">
-        <div>
-            <img src="{{asset('/images/logo.png')}}" alt="" class="w-full h-20">
-            Buy & Sell
-        </div>
+        <a href="{{route('index')}}">
+            <div>
+                <img src="{{asset('/images/logo.png')}}" alt="" class="w-full h-20">
+                Buy & Sell
+            </div>
+        </a>
         <div>
             @if (Route::has('login'))
                 <div>
@@ -24,6 +26,7 @@
                             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                         @endif
                     @endauth
+                    <a href="{{route('cart')}}" class="ml-4 text-sm text-gray-700 dark:text-gray-500">[{{ session()->has('cart')?count(session('cart')):0 }}]</a>
                 </div>
             @endif
         </div>
