@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckCart;
 use App\Http\Middleware\VerifySeller;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -65,5 +66,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verify_seller' => \App\Http\Middleware\VerifySeller::class,
+        'check_cart' => \App\Http\Middleware\CheckCart::class,
     ];
 }

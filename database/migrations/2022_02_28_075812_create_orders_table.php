@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('total_amount');
             $table->enum('payment_type',['card','cod']);
+            $table->enum('status',['Pending','Processing','Shipped','Canceled','Delivered'])->default('Pending');
             $table->timestamps();
         });
     }

@@ -54,10 +54,18 @@
             <div class="absolute bottom-0 right-0 m-6 rounded-full px-4 py-2 bg-green-500">
                 <div class="text-white font-bold text-sm">${{$product->price}}</div>
             </div>
-            <div class="absolute bottom-0 left-4 m-6 px-4 py-2 rounded-full bg-teal-500">
-                <a class="font-bold text-white text-sm" href="{{route('add.to.cart',$product->id)}}">Add to Cart</a>
-            </div>
-
+                @php $cart = session('cart');
+                    $id = $product->id;
+                @endphp
+                @if(array_key_exists($id, $cart))
+                    <div class="absolute bottom-0 left-4 m-6 px-4 py-2 rounded-full bg-gray-400">
+                        <a class="font-bold text-white text-sm">Add to Cart</a>
+                    </div>
+                @else
+                    <div class="absolute bottom-0 left-4 m-6 px-4 py-2 rounded-full bg-teal-500">
+                        <a class="font-bold text-white text-sm" href="{{route('add.to.cart',$product->id)}}">Add to Cart</a>
+                    </div>
+                @endif
         </div>
     </div>
 </x-master-layout>

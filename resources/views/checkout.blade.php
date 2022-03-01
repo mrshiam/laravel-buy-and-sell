@@ -9,32 +9,32 @@
                                     <div class="px-4 py-5 bg-white sm:p-6">
                                         <div class="grid grid-cols-6 gap-6">
                                             <div class="col-span-6 sm:col-span-3">
-                                                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                                                <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                @error('first-name')
+                                                <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
+                                                <input type="text" value="{{old('first_name')}}" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                @error('first_name')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
                                             <div class="col-span-6 sm:col-span-3">
-                                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                                                <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                @error('last-name')
+                                                <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
+                                                <input type="text" value="{{old('last_name')}}" name="last_name" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                @error('last_name')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
                                             <div class="col-span-6 sm:col-span-3">
-                                                <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                                                <input type="text" name="email-address" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                @error('email-address')
+                                                <label for="email_address" class="block text-sm font-medium text-gray-700">Email address</label>
+                                                <input type="text" value="{{old('email_address')}}" name="email_address" id="email_address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                @error('email_address')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                                                <input type="text" name="phone" id="phone" autocomplete="" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                <input type="text" value="{{old('phone')}}" name="phone" id="phone" autocomplete="" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 @error('phone')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
@@ -44,10 +44,10 @@
                                                 <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                                                 <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     <option value="">Please Select a Country</option>
-                                                    <option value="Bangladesh">Bangladesh</option>
-                                                    <option value="United States">United States</option>
-                                                    <option value="Canada">Canada</option>
-                                                    <option value="Mexico">Mexico</option>
+                                                    <option @if(old('country') == 'Bangladesh') selected @endif value="Bangladesh">Bangladesh</option>
+                                                    <option @if(old('country') == 'United States') selected @endif value="United States">United States</option>
+                                                    <option @if(old('country') == 'Canada') selected @endif value="Canada">Canada</option>
+                                                    <option @if(old('country') == 'Mexico') selected @endif value="Mexico">Mexico</option>
                                                 </select>
                                                 @error('country')
                                                 <div class="text-rose-700">{{ $message }}</div>
@@ -55,16 +55,16 @@
                                             </div>
 
                                             <div class="col-span-6">
-                                                <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
-                                                <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                @error('street-address')
+                                                <label for="street_address" class="block text-sm font-medium text-gray-700">Street address</label>
+                                                <input type="text" value="{{old('street_address')}}" name="street_address" id="street_address" autocomplete="street_address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                @error('street_address')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
                                             <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                                                 <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                                                <input type="text" name="city" id="city" autocomplete="address-level2" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                <input type="text" value="{{old('city')}}" name="city" id="city" autocomplete="address-level2" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 @error('city')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
@@ -72,9 +72,9 @@
 
 
                                             <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                                <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
-                                                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                @error('postal-code')
+                                                <label for="postal_code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                                                <input type="text" value="{{old('postal_code')}}" name="postal_code" id="postal_code" autocomplete="postal_code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                @error('postal_code')
                                                 <div class="text-rose-700">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -142,12 +142,12 @@
                             <div class="col-span-6 sm:col-span-3 mt-10">
                                 <p class="block text-lg font-bold text-gray-700">Select Payment type</p>
                                 <div>
-                                    <input class="m-1.5" type="radio" id="card" name="payment_type" value="card">
+                                    <input class="m-1.5" type="radio" id="card" @if(old('payment_type') == 'card') checked @endif name="payment_type" value="card">
                                     <label class="p-0.5 font-semibold" for="card">Card</label>
                                 </div>
 
                                 <div>
-                                    <input class="m-1.5" type="radio" id="cod" name="payment_type" value="cod">
+                                    <input class="m-1.5" type="radio" id="cod" @if(old('payment_type') == 'cod') checked @endif name="payment_type" value="cod">
                                     <label class="p-0.5 font-semibold" for="cod">Cash On Delivery</label>
                                 </div>
                                 @error('payment_type')

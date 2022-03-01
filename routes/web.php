@@ -40,6 +40,7 @@ Route::get('/sell', function () {
 Route::get('add-to-cart/{product_id}', [CartController::class,'addToCart'])->name('add.to.cart');
 Route::get('cart', [CartController::class,'cart'])->name('cart');
 Route::get('cart.item.delete/{product_id}', [CartController::class,'removeItem'])->name('delete.item');
-Route::get('checkout',[CheckoutController::class,'checkout'])->name('checkout');
+Route::get('checkout',[CheckoutController::class,'checkout'])->name('checkout')->middleware('check_cart');
 Route::post('checkout',[CheckoutController::class,'store'])->name('place.order');
+Route::get('order/success',[CheckoutController::class,'success'])->name('order.success');
 require __DIR__.'/auth.php';
