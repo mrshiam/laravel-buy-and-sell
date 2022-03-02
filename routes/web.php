@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,9 @@ Route::delete('/delete/{id}', [ProductsController::class,'destroy'])->middleware
 Route::get('/sell', function () {
     return view('sell');
 })->middleware(['auth']);
+Route::get('order/lists',[OrderController::class,'index'])->name('order.list')->middleware(['auth']);
+Route::get('order/show/{order_id}',[OrderController::class,'show'])->name('order.show')->middleware(['auth']);
+Route::get('order/show/{order_id}/{status}',[OrderController::class,'update'])->name('order.change.status')->middleware(['auth']);
 
 Route::get('add-to-cart/{product_id}', [CartController::class,'addToCart'])->name('add.to.cart');
 Route::get('cart', [CartController::class,'cart'])->name('cart');
