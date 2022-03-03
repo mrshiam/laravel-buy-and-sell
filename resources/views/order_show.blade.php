@@ -8,11 +8,28 @@
                 <div><b>Order ID:</b> {{$order->order_id}}</div>
                 <div><b>Status:</b> {{$order->status}}</div>
                 <div><b>Total Amount:</b> {{$order->total_amount}}</div>
-                <div class="mt-1.5">
-                    <a class="bg-blue-900 p-2 text-white rounded" href="{{route('order.change.status',[$order->id,'Processing'])}}">Processing</a>
-                    <a class="bg-blue-500 p-2 text-white rounded" href="{{route('order.change.status',[$order->id,'Shipped'])}}">Shipped</a>
-                    <a class="bg-green-600 p-2 text-white rounded" href="{{route('order.change.status',[$order->id,'Delivered'])}}">Delivered</a>
-                    <a class="bg-red-600 p-2 text-white rounded" href="{{route('order.change.status',[$order->id,'Canceled'])}}">Canceled</a>
+                <div class="mt-1.5 flex flex-row" >
+                    <form class="m-2" action="{{route('order.change.status',[$order->id,'Processing'])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="bg-blue-900 p-2 text-white rounded" onclick="return confirm('Are You sure to do this?')">Processing</button>
+                    </form>
+                    <form class="m-2" action="{{route('order.change.status',[$order->id,'Shipped'])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="bg-blue-500 p-2 text-white rounded" onclick="return confirm('Are You sure to do this?')">Shipped</button>
+                    </form>
+                    <form class="m-2" action="{{route('order.change.status',[$order->id,'Delivered'])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="bg-green-600 p-2 text-white rounded" onclick="return confirm('Are You sure to do this?')">Delivered</button>
+                    </form>
+                    <form class="m-2" action="{{route('order.change.status',[$order->id,'Canceled'])}}" method="post">
+                        @csrf
+                        @method('put')
+                        <button class="bg-red-500 p-2 text-white rounded" onclick="return confirm('Are You sure to do this?')">Canceled</button>
+                    </form>
+
                 </div>
             </div>
             <div>
@@ -69,6 +86,10 @@
                                 <!-- More people... -->
                                 </tbody>
                             </table>
+
+                        </div>
+                        <div class="mt-3">
+                            <a class="bg-yellow-500 p-2 text-white rounded" href="{{route('order.list')}}">Back</a>
                         </div>
                     </div>
                 </div>

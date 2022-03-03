@@ -21,4 +21,11 @@ class OrderController extends Controller
         }])->findOrFail($id);
         return view('order_show')->with('order',$order);
     }
+
+    public function update($order_id,$order_status){
+        $order = Order::findOrFail($order_id);
+        $order->status = $order_status;
+        $order->save();
+        return redirect()->back();
+    }
 }
