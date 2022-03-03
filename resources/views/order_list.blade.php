@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
         <div class="px-8 py-4">
             <div class="relative bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -19,7 +18,38 @@
 
             </div>
         </div>
+
+    <div class="px-8 py-4">
+        <div class="relative bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 bg-white border-b border-gray-200">
+                <form action="">
+                    <div class="grid grid-cols-12 gap-2">
+                        <div class="col-span-5">
+                            <input class="w-full" value="{{request('client_information')}}" type="text" name="client_information" placeholder="Search with client information">
+                        </div>
+                        <div class="col-span-3">
+                            <input class="w-full" value="{{request('order_id')}}" type="text" name="order_id" placeholder="Search with Order Id">
+                        </div>
+                        <div class="col-span-3">
+                            <select class="w-full" name="status" id="">
+                                <option value="">Select Status</option>
+                                <option {{ (request('status') == \App\Models\Order::STATUS_PENDING)?'selected':null }} value="{{\App\Models\Order::STATUS_PENDING}}">{{\App\Models\Order::STATUS_PENDING}}</option>
+                                <option {{ (request('status') == \App\Models\Order::STATUS_PENDING)?'selected':null }} value="{{\App\Models\Order::STATUS_PROCESSING}}">{{\App\Models\Order::STATUS_PROCESSING}}</option>
+                                <option {{ (request('status') == \App\Models\Order::STATUS_SHIPPED)?'selected':null }} value="{{\App\Models\Order::STATUS_SHIPPED}}">{{\App\Models\Order::STATUS_SHIPPED}}</option>
+                                <option {{ (request('status') == \App\Models\Order::STATUS_DELIVERED)?'selected':null }} value="{{\App\Models\Order::STATUS_DELIVERED}}">{{\App\Models\Order::STATUS_DELIVERED}}</option>
+                                <option {{ (request('status') == \App\Models\Order::STATUS_CANCELLED)?'selected':null }} value="{{\App\Models\Order::STATUS_CANCELLED}}">{{\App\Models\Order::STATUS_CANCELLED}}</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1">
+                            <button type="submit" class="bg-gray-500 mt-0.5 p-2 text-white rounded">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
+
 
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -77,6 +107,7 @@
                         <!-- More people... -->
                         </tbody>
                     </table>
+                    {{ $orders->links() }}
                 </div>
             </div>
         </div>
